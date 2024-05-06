@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Registration</title>
+    <style>
+       body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+       }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            justify-content: center;
+            height:50px;
+            padding:10px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 15px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: #013803af, 4px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding:5px auto;
+            height: 24px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .form-group button {
+            padding: 10px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Coach Registration</h1>
+    </div>
+<div class="container">
+    <form action="register_coach.php" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="coachName">Coach Name</label>
+            <input type="text" id="coachName" name="coachName" required>
+        </div>
+        <div class="form-group">
+            <label for="phone-number">Phone Number</label>
+            <input type="text" id="phone-number" name="phone-number" required>
+        </div>
+        <div class="form-group">
+            <label for="team">Team</label>
+            <select id="team" name="team" required>
+                <option value="">Select a Team</option>
+                <!-- Add options for teams dynamically or manually -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div class="form-group">
+            <label for="experience">Experience (in years)</label>
+            <input type="number" id="experience" name="experience" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required>
+        </div>
+        <div class="form-group">
+            <label for="coachPhoto">Coach Photo</label>
+            <input type="file" id="coachPhoto" name="coachPhoto" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</div>
+<script>
+    // Fetch teams data and dynamically populate the select element
+    fetch("get_teams.php")
+    .then(response => response.json())
+    .then(data => {
+      const teamSelect = document.getElementById("team");
+      data.forEach(team => {
+        const option = document.createElement("option");
+        option.value = team.teamName;
+        option.textContent = team.teamName;
+        teamSelect.appendChild(option);
+      });
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+    </script>
+</body>
+</html>

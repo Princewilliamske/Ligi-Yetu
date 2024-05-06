@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Teams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button.exit {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Registered Teams</h1>
+</div>
+
+<div class="container">
+    <div class="filter-section">
+        <label for="gameFilter">Filter by Game:</label>
+        <select id="gameFilter">
+            <option value="all">All Games</option>
+            <option value="volleyball">Volleyball</option>
+            <option value="basketball">Basketball</option>
+            <option value="soccer">Soccer</option>
+            <!-- Add more options as needed -->
+        </select>
+        <button id="searchButton">Search</button>
+    </div>
+
+    <table id="teamTable">
+        <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Number of Players</th>
+                <th>Game</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+               <!--logic behind retrieval of data from the database-->> 
+            </tr>
+           
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+
+<div class="button-group">
+    <button class="exit">Exit</button>
+</div>
+
+</body>
+</html>

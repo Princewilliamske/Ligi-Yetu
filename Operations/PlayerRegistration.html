@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Registration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            height:25px;
+        }
+        h1{
+            margin-top:-5px;
+        }
+        .form-container {
+            display: flex;
+            justify-content: center;
+          
+            margin: 5px;
+            background-image: linear-gradient(right, grey 50%, cream 50%);
+        }
+        .form-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 15px;
+            padding: 30px auto;
+            background: rgba(255, 255, 255, 0.418);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 98%;
+          padding: 16px auto;
+            margin: 5px auto;
+            border: 1px solid green;
+            border-radius: 4px;
+        }
+       
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin:30px;
+        }
+        .button-register {background-color: #4CAF50; color: white;}
+        .button-update {background-color: #f0ad4e; color: white;}
+        .button-delete {background-color: #d9534f; color: white;}
+        .button-exit {background-color: #5bc0de; color: white;}
+
+        .button-register:hover {background-color: #45a049;}
+        .button-update:hover {background-color: #ec971f;}
+        .button-delete:hover {background-color: #c9302c;}
+        .button-exit:hover {background-color: #31b0d5;}
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Player Registration</h1>
+</div>
+
+<div class="form-container">
+    <div class="form-box">
+        <form action="register_player.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="surName">Sur Name</label>
+                <input type="text" id="surName" name="surName">
+            </div>
+            <div class="form-group">
+                <label for="middleName">Middle Name</label>
+                <input type="text" id="middleName" name="middleName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName">
+            </div>
+            <div class="form-group">
+                <label for="sport">Sport</label>
+                <select id="sport" name="sport">
+                    <option value="">Select a Sport</option>
+                    
+                    
+                    <!-- Add more games as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="middleName">Team</label>
+                <select id="team" name="team">
+                    <option value="">Select a Team</option>
+                    
+                    
+                    <!-- Add more games as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="text" id="position" name="position" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="teamPhoto">Player Photo</label>
+                <input type="file" id="teamPhoto" name="teamPhoto" required>
+            </div> 
+
+            <div class="button-group">
+                <button type="submit" class="button-register">Register</button>
+                <button type="button" class="button-update">Update</button>
+                <button type="button" class="button-delete">Delete</button>
+                <button type="button" onclick="exit();"class="button-exit">Exit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function exit() {
+        // Redirect to main.html
+        window.location.href = "main.html";
+    }
+</script>
+</body>
+</html>

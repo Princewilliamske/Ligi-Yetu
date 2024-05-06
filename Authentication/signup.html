@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* Inline CSS for demonstration */
+        body {
+            background-color: #8FBC8F; /* Green background */
+            font-family: Arial, sans-serif;
+            margin: 0; /* Reset default margin */
+            padding-top: 50px; /* Add padding-top to compensate for fixed navbar */
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px 0;
+            z-index: 999; /* Ensure the navbar is above other elements */
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid green;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .login-form {
+            background-color: white;
+            max-width: 300px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 5px;
+            margin: 10px 0;
+            border: 1px solid grey;
+            border-radius: 5px;
+        }
+        .sbut {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .sbut:hover {
+            background-color: #45a049;
+        }
+        .signup{
+            margin-left:20px;
+        }
+        section{
+            width:100%;
+            height:550px;
+            margin-top: 60px; /* Add margin-top to create space between navbar and sections */
+        }
+        p{
+            margin-top:50px;
+            font-size:30px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#home" onclick="">Home</a>
+        <a href="#about" onclick="">About</a>
+        <a href="#announcement" onclick="">Announcement</a>
+        <a href="#login" onclick="">Login</a>
+        <a href="#signup">Sign Up</a>
+    </div>
+                <p>Welcome to Ligi Yetu</p>
+    <section id="login">
+        <div class="login-form">
+            <form action="signup.php" method="post" id="signup">
+                <label for="username">Full Name:</label><br>
+                <input type="text" id="fname" name="fname" required><br>
+                <label for="username">Email:</label><br>
+                <input type="text" id="email" name="email" required><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br>
+                <button type="submit" class="sbut" onclick="submit()">Login</button>
+                Already  have an account?<br>
+                 <a class="signup" href="">login.</a>
+            </form>
+            <script>
+                 //validate and post thee form
+            function submit(){
+              //validate form fields
+              if(validate()){
+                //form is valid proceed to submit
+                  var formdata = new FormData(document.getElementById('signup'));
+
+                  //make an Ajax request to submit the form
+                  var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                   if (this.readyState == 4 && this.status == 200) {
+                // Form submitted successfully, display success message
+                alert('Signup successful');
+            }
+        };
+        xhttp.open("POST", "signup.php", true);
+        xhttp.send(formData);
+    }
+}
+                //validate the input
+                function validate(){
+                    var name =  document.getElementById("fname").value;
+                    var email = document.getElementById("email").value;
+                    var password = document.getElementById("password").value;
+                    
+                    //make sure email and password are not empty
+                    if(name == "" || password == "" || email =="" || !isValidEmailAddress(email)) {
+                        alert('Please enter a valid username and password');
+                        return false;
+                    }else{
+                        return true;
+                    }
+                };
+            
+                /**
+                 * Checks whether an email address is valid or not
+                 */
+                function isValidEmailAddress(email) {
+                    var regExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                    return regExp.test(email);
+                };
+            </script>
+        </div>
+    </section>
+
+    <div class="footer">
+        &copy; 2024 Ligi yetu. All rights reserved.
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tournaments</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  .button-group {
+    text-align: center;
+  }
+  .button-group button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  .tournament-list {
+    margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
+  }
+  .tournament-list li {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Tournaments</h1>
+
+  <!-- Tournament Registration Form -->
+  <div>
+    <h2>Register Tournament</h2>
+    <form id="tournamentForm" >
+      <div class="form-group">
+        <label for="tournamentName">Tournament Name</label>
+        <input type="text" id="tournamentName" name="tournamentName" required>
+      </div>
+      <div class="form-group">
+        <label for="game">Game</label>
+        <select id="game" name="game" required>
+          <option value="">Select a Game</option>
+          <option value="football">Football</option>
+          <option value="basketball">Basketball</option>
+          <option value="volleyball">Volleyball</option>
+          <!-- Add more games as needed -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="startDate" required>
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" name="endDate" required>
+      </div>
+      <div class="button-group">
+        <button type="submit">Register Tournament</button>
+        <button type="reset">Clear</button>
+        <button onclick="exit();"type="button">Exit</button>
+      </div>
+    </form>
+    <script>
+        function exit() {
+            // Redirect to main.html
+            window.location.href = "main.html";
+        }
+    </script>
+  </div>
+
+  <!-- Available Tournaments List -->
+  <div>
+    <h2>Available Tournaments</h2>
+    <ul class="tournament-list" id="tournamentList">
+      <!-- Tournaments will be dynamically added here -->
+    </ul>
+  </div>
+</div>
+
+<script>
+  // Handle form submission
+  document.getElementById("tournamentForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    // Collect form data
+    var formData = new FormData(this);
+
+    // Send form data to server via AJAX
+    fetch("register_tournament.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Display success message or handle errors
+      console.log(data);
+      // Refresh tournament list
+      fetchTournaments();
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  });
+
+  // Function to fetch and display tournaments
+  function fetchTournaments() {
+    fetch("get_tournaments.php")
+    .then(response => response.json())
+    .then(data => {
+      // Clear existing tournament list
+      document.getElementById("tournamentList").innerHTML = "";
+
+      // Append each tournament to the list
+      data.forEach(tournament => {
+        var li = document.createElement("li");
+        li.textContent = tournament.tournamentName + " - " + tournament.game + " (" + tournament.startDate + " to " + tournament.endDate + ")";
+        document.getElementById("tournamentList").appendChild(li);
+      });
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  }
+
+  // Fetch tournaments on page load
+  fetchTournaments();
+</script>
+
+</body>
+</html>
